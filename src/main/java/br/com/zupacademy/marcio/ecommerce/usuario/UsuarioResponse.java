@@ -6,12 +6,12 @@ public class UsuarioResponse {
 
     private String login;
     private String senha;
-    private LocalDateTime dataCadastro;
+    private LocalDateTime instanteCadastro;
 
     public UsuarioResponse(Usuario usuario) {
         this.login = usuario.getLogin();
         this.senha = usuario.getSenha();
-        this.dataCadastro = usuario.getDataCadastro();
+        this.instanteCadastro = usuario.getInstanteCadastro();
     }
 
     public String getLogin() {
@@ -22,7 +22,7 @@ public class UsuarioResponse {
         return senha;
     }
 
-    public LocalDateTime getDataCadastro() {
-        return dataCadastro;
+    public LocalDateTime getInstanteCadastro() {
+        return instanteCadastro;
     }
 }

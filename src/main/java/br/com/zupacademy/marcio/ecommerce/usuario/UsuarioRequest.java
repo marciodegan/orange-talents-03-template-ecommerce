@@ -18,7 +18,8 @@ public class UsuarioRequest {
         this.senha = senha;
     }
 
-    public Usuario converter() {
-        return new Usuario(this.login, this.senha);
+    public Usuario converter(){
+        return new Usuario(login, new SenhaLimpa(senha));
     }
 }
+
