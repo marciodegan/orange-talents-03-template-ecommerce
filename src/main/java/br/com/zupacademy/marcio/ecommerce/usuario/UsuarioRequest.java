@@ -7,10 +7,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 public class UsuarioRequest {
-    @NotBlank @Email // @UniqueValue(domainClass = Usuario.class, fieldName = "login")
+    @NotBlank @Email @UniqueValue(domainClass = Usuario.class, fieldName = "login")
     private String login;
     @NotBlank
-    @Length(min=6)
+    @Length(min = 6)
     private String senha;
 
     public UsuarioRequest(@NotBlank @Email String login, @NotBlank @Length(min = 6) String senha) {
@@ -18,11 +18,7 @@ public class UsuarioRequest {
         this.senha = senha;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public Usuario converter(){
+    public Usuario converter() {
         return new Usuario(this.login, this.senha);
     }
 }
