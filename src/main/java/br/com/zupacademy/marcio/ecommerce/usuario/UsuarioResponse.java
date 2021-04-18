@@ -4,18 +4,18 @@ import java.time.LocalDateTime;
 
 public class UsuarioResponse {
 
-    private String login;
+    private String email;
     private String senha;
     private LocalDateTime instanteCadastro;
 
     public UsuarioResponse(Usuario usuario) {
-        this.login = usuario.getLogin();
+        this.email = usuario.getEmail();
         this.senha = usuario.getSenha();
         this.instanteCadastro = usuario.getInstanteCadastro();
     }
 
-    public String getLogin() {
-        return login;
+    public String getEmail() {
+        return email;
     }
 
     public String getSenha() {

@@ -17,7 +17,7 @@ public class Usuario {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private String login;
+    private String email;
     @Column(nullable = false) @Size(min=6)
     private String senha;
     @Column(nullable=false) @PastOrPresent
@@ -28,10 +28,10 @@ public class Usuario {
 
     }
 
-    public Usuario(@Email String login, @Valid @NotNull SenhaLimpa senhaLimpa) {
-        Assert.isTrue(StringUtils.hasLength(login),"email não pode ser em branco");
+    public Usuario(@Email String email, @Valid @NotNull SenhaLimpa senhaLimpa) {
+        Assert.isTrue(StringUtils.hasLength(email),"email não pode ser em branco");
         Assert.notNull(senhaLimpa,"o objeto do tipo senha limpa nao pode ser nulo");
-        this.login = login;
+        this.email = email;
         this.senha = senhaLimpa.hash();
         this.instanteCadastro = LocalDateTime.now();
 
@@ -41,8 +41,8 @@ public class Usuario {
         return id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getEmail() {
+        return email;
     }
 
     public String getSenha() {
@@ -52,4 +52,5 @@ public class Usuario {
     public LocalDateTime getInstanteCadastro() {
         return instanteCadastro;
     }
+
 }
