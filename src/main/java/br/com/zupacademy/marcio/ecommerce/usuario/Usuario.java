@@ -45,6 +45,7 @@ public class Usuario {
         return email;
     }
 
+    // para usuário logado
     public String getSenha() {
         return senha;
     }
@@ -53,4 +54,12 @@ public class Usuario {
         return instanteCadastro;
     }
 
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", instanteCadastro=" + instanteCadastro +
+                '}';
+    }
 }
