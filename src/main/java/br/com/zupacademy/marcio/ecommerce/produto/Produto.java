@@ -88,4 +88,9 @@ public class Produto {
     public boolean pertenceAoUsuario(Usuario dono) {
         return this.dono.equals(dono);
     }
+
+    // p/ enviar email
+    public Usuario getDono() {
+        return this.dono;
+    }
 }
