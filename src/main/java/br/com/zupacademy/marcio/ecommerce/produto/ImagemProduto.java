@@ -31,4 +31,8 @@ public class ImagemProduto {
                 ", link='" + link + '\'' +
                 '}';
     }
+    // p/ mapear em DetalheProduto
+    public String getLink() {
+        return link;
+    }
 }
