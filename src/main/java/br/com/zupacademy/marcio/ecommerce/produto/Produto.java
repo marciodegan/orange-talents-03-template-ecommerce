@@ -137,4 +137,13 @@ public class Produto {
     public Opinioes getOpinioes() {
         return new Opinioes(this.opinioes);
     }
+
+    public boolean abateEstoque(@Positive int quantidade) { // booleano p/ confirmar se abateu ou não o estoque
+        Assert.isTrue(quantidade > 0, "Qtde deve ser maior p/ abater o estoque.");
+        if(quantidade <= this.quantidade) {
+            this.quantidade-=quantidade;
+            return true;
+        }
+        return false;
+    }
 }
