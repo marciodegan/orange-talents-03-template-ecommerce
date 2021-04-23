@@ -46,8 +46,23 @@ public class Compra {
                 '}';
     }
 
-    // p/ retornar a url c/ gateway
     public Long getId() {
         return id;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public Produto getProdutoEscolhido() {
+        return produtoEscolhido;
+    }
+
+    public Usuario getComprador() {
+        return comprador;
+    }
+
+    public GatewayPagamento getGatewayPagamento() {
+        return gatewayPagamento;
     }
 }

@@ -1,9 +1,12 @@
 package br.com.zupacademy.marcio.ecommerce.fechamentocompra;
 
+import br.com.zupacademy.marcio.ecommerce.compartilhado.Emails;
+import br.com.zupacademy.marcio.ecommerce.compartilhado.UsuarioLogado;
 import br.com.zupacademy.marcio.ecommerce.produto.Produto;
 import br.com.zupacademy.marcio.ecommerce.usuario.Usuario;
 import br.com.zupacademy.marcio.ecommerce.usuario.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,9 +27,13 @@ public class FechaCompraParte1Controller {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private Emails emails;
+
     @PostMapping(value="/compras")
     @Transactional
     public String novaCompra(@RequestBody @Valid NovaCompraRequest request,
+                             @AuthenticationPrincipal UsuarioLogado usuarioLogado,
                              UriComponentsBuilder uriComponentsBuilder) throws BindException {
 
         Produto produtoASerComprado = manager.find(Produto.class, request.getIdProduto());
@@ -35,11 +42,12 @@ public class FechaCompraParte1Controller {
         boolean abateuEstoque = produtoASerComprado.abateEstoque(quantidade);
 
         if(abateuEstoque) {
-            Usuario comprador = usuarioRepository.findByEmail("m@m.com").get();
+            Usuario comprador = usuarioLogado.get();
             GatewayPagamento gateway = request.getGateway();
 
             Compra novaCompra = new Compra(produtoASerComprado, quantidade, comprador, gateway);
             manager.persist(novaCompra);
+            emails.novaCompra(novaCompra);
             if(gateway.equals(GatewayPagamento.pagseguro)){
                 String urlRetornoPagSeguro = uriComponentsBuilder.path("/retorno-pagseguro/{id}")
                         .buildAndExpand(novaCompra.getId()).toString();

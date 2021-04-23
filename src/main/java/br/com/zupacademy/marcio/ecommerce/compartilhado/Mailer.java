@@ -16,4 +16,12 @@ public interface Mailer {
               @NotBlank String nameFrom,
               @NotBlank @Email String from,
               @NotBlank @Email String to);
+
+    void sendNovaCompra(@NotBlank String body,
+              @NotBlank Long id,
+              @NotBlank @Email String to,
+              @NotBlank @Email String from,
+              @NotBlank String produto,
+              @NotBlank int quantidade,
+              @NotBlank String gateway);
 }
